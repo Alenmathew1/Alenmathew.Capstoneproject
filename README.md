@@ -4,50 +4,50 @@ import pandas as pd
 df = pd.read_csv("TiresDataFile_DSCI490_2024AY.csv") df.head()
 print(df.shape)
 df.info()
-# percentage of missing values in columns
+## percentage of missing values in columns
 
 (df.isnull().sum()/len(df)) * 100
-# columns with missing values
+## columns with missing values
 df.columns[df.isnull().sum()>0]
-# total count of missing values in columns
+## total count of missing values in columns
 df[df.columns[df.isnull().sum()>0]].isnull().sum()
-# dropping redundant and missing columns
+## dropping redundant and missing columns
 df = df.drop(["Additional vehicle(s)" , "Account No."], axis = 1)
 Imputing values
 Categorical Features
-# household income
+## Household income
 df['Household income'] = df['Household income'].fillna(df['Household income'].mode()[0])
-# Vehicle types
+## Vehicle types
 df['Primary Vehicle type'] = df['Primary Vehicle type'].fillna(df['Primary Vehicle type'].mode()[0]) df['2nd Vehicle type'] = df['2nd Vehicle type'].fillna('Not Available')
 df['3rd Vehicle type'] = df['3rd Vehicle type'].fillna('Not Available')
 df['4th Vehicle type'] = df['4th Vehicle type'].fillna('Not Available')
-# Highest quality of rim purchased
+## Highest quality of rim purchased
 
 df['Highest quality of rim purchased in the last 5 years'] = df['Highest quality of rim purchased in the last 5 years'].fillna(df['Highest quality of rim purchased in the last 5 years'].mode()[0])
-# Discount code obtained
+## Discount code obtained
 
 df.rename(columns={'Discount code obtained ': 'Discount code obtained'}, inplace=True)
 
 df['Discount code obtained'] = df['Discount code obtained'].fillna(df['Discount code obtained'].mode()[0]) df['Discount code obtained'].replace({'0': df['Discount code obtained'].mode()[0]}, inplace=True)
-# Discount code
+## Discount code
 df['Discount code'].replace({'NA': '0', '#NA' : '0'}, inplace=True) df['Discount code'] = df['Discount code'].fillna(df['Discount code'].mode()[0])
-# Promo responses as 'N'
+## Promo responses as 'N'
 
 df['Responded\nMarch Promo (summer tires)'].fillna('N', inplace = True) df['Responded\nMarch promo (all seasons)'].fillna('N', inplace = True) df['Responded\nAugust Promo (all-season tires)'].fillna('N', inplace = True) df['Responded\nOctober Promo (winter tires)'].fillna('N', inplace = True) df['Responded\nNovember promo (winter tires)'].fillna('N', inplace = True)
 Numerical feature
-# Birth Year
+## Birth Year
 df['Cust. Year_Birth'].fillna(df['Cust. Year_Birth'].median(), inplace = True)
-# KM per year
+## KM per year
 df['KM per year'].replace({0:df['KM per year'].median()}, inplace = True)
-# sets of summer tires
+## Sets of summer tires
 
 df['Summer tires \n(# sets purchased)'].fillna(df['Summer tires \n(# sets purchased)'].median(), inplace = True)
-# converting dates to datetime
+## Converting dates to datetime
 
 df['Last Date of purchase summer'] = pd.to_datetime(df['Last Date of purchase summer'], format = "%m/%d/%Y") df['Last Date of purchase winter'] = pd.to_datetime(df['Last Date of purchase winter'], format = "%m/%d/%Y") df['Last Date of purchase all seasons'] = pd.to_datetime(df['Last Date of purchase all seasons'], format = "%m/%d/%Y")
 df.to_excel('tire_output_file.xlsx', index=False)
 
-# EXPLORATORY DATA ANALYSIS
+# Exploratory data analysis
 import pandas as pd
 df = pd.read_excel("tire_output_file.xlsx")
 df.head()
@@ -126,7 +126,7 @@ prediction = model.forecast(steps = 3 )
 series['Sets Sold'].plot() prediction.plot()
 new_df = pd.read_excel("tire_output_file.xlsx")
 new_df['Age'] = 2024 - new_df['Cust. Year_Birth']
-## clustering
+## Clustering
 Cluster_df = pd.read_csv("Tire_set.csv") Cluster_df.head()
 Cluster_df['Age'] = new_df['Age']
 Cluster_df.columns
