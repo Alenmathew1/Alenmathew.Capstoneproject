@@ -1,5 +1,5 @@
 # Alenmathew.Capstoneproject
-# DATA CLEANING
+# Data cleaning
 import pandas as pd
 df = pd.read_csv("TiresDataFile_DSCI490_2024AY.csv") df.head()
 print(df.shape)
@@ -126,7 +126,7 @@ prediction = model.forecast(steps = 3 )
 series['Sets Sold'].plot() prediction.plot()
 new_df = pd.read_excel("tire_output_file.xlsx")
 new_df['Age'] = 2024 - new_df['Cust. Year_Birth']
-# clustering
+## clustering
 Cluster_df = pd.read_csv("Tire_set.csv") Cluster_df.head()
 Cluster_df['Age'] = new_df['Age']
 Cluster_df.columns
